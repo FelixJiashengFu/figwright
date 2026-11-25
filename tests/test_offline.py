@@ -195,6 +195,12 @@ def test_a_verb_is_not_swallowed_into_the_name_before_it():
     assert len(content["relations"]) == 2
 
 
+def test_a_role_word_does_not_reach_across_a_line_break():
+    """A new line starts a new statement: joining the two loses the boundary."""
+    content = offline.pathway_content("EGF activates EGFR\nreceptor activates RAS")
+    assert [e["name"] for e in content["entities"]] == ["EGF", "EGFR", "RAS"]
+
+
 # ------------------------------------------------------------------ abstract / poster
 
 

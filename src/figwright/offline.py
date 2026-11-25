@@ -366,7 +366,7 @@ _NAME_LATIN = r"[A-Za-zα-ωΑ-Ω][A-Za-z0-9α-ωΑ-Ω+]*(?:[-/][A-Za-z0-9α-ω�
 # A role word belongs to the name in front of it: "MEK inhibitor" and "IL-6
 # receptor" are one entity each, not a name followed by a word to throw away.
 _ROLE_WORD = r"inhibitors?|antagonists?|agonists?|blockers?|activators?|receptors?|ligands?|kinases?|antibod(?:y|ies)|complex(?:es)?"
-_NAME_PHRASE = rf"{_NAME_LATIN}(?:\s+(?:{_ROLE_WORD})\b)?"
+_NAME_PHRASE = rf"{_NAME_LATIN}(?:[ \t]+(?:{_ROLE_WORD})\b)?"  # spaces only: a line break ends the sentence
 _NAME_CJK = r"[一-鿿]{1,6}(?:受体|蛋白|激酶|因子|素|酶|通道|复合物)"
 _VERBS = [
     ("inhibit", r"-\||⊣|--\||inhibits?|represses?|suppress(?:es)?|blocks?|downregulates?|degrades?|antagoni[sz]es?|抑制|阻断|下调|降解|拮抗|阻止"),

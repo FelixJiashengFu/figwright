@@ -112,7 +112,7 @@ SVG（带场景，可再编辑）、PPTX（真形状、真文字、原生图表�
 
 ```bash
 pip install -e ".[dev]"
-python -m pytest -q          # 563 项
+python -m pytest -q          # 564 项
 ```
 
 测试里有一项值得一提：`tests/test_parity.py` 会用 node 跑一遍 JavaScript 渲染器，和 Python 渲染器在七个场景、约一万两千个格式化数值上逐一对账。两份渲染器只要有一处不一致就红。没装 node 时这项自动跳过。
@@ -268,7 +268,7 @@ Stated plainly, because that is more useful than sounding good:
 
 ```bash
 pip install -e ".[dev]"
-python -m pytest -q          # 563 tests
+python -m pytest -q          # 564 tests
 ```
 
 One of them is worth calling out: `tests/test_parity.py` runs the JavaScript
