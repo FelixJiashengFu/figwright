@@ -1,0 +1,30 @@
+{
+  "title": "30 分钟试纸条快速检出耐药菌",
+  "panels": [
+    {
+      "heading": "问题",
+      "icon": "bacterium",
+      "bullets": [
+        "耐药菌感染日益增多",
+        "培养法需要 2 到 3 天"
+      ]
+    },
+    {
+      "heading": "方法",
+      "icon": "scissors",
+      "bullets": [
+        "基于 CRISPR 的试纸条",
+        "无需仪器，30 分钟读数"
+      ]
+    },
+    {
+      "heading": "发现",
+      "icon": "chart",
+      "bullets": [
+        "120 份临床样本",
+        "与培养法结果高度一致"
+      ]
+    }
+  ],
+  "takeaway": "试纸条检测可用于基层的快速筛查。"
+}

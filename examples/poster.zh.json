@@ -1,0 +1,34 @@
+{
+  "title": "肠道菌群多样性与睡眠质量的关联",
+  "authors": "作者一，作者二，作者三",
+  "affiliations": "某某大学 某某学院",
+  "columns": 3,
+  "sections": [
+    {
+      "heading": "背景",
+      "body": "• 睡眠障碍发病率逐年上升\n• 肠脑轴可能参与睡眠调节\n• 人群证据仍然有限",
+      "figure": null
+    },
+    {
+      "heading": "方法",
+      "body": "• 招募 200 名成年志愿者\n• 粪便 16S rRNA 测序\n• 连续两周睡眠日志",
+      "figure": "研究流程图"
+    },
+    {
+      "heading": "结果",
+      "body": "• 睡眠较差组菌群多样性显著降低\n• 若干菌属丰度与睡眠评分相关",
+      "figure": "多样性比较图"
+    },
+    {
+      "heading": "结论",
+      "body": "• 菌群多样性可能是睡眠质量的潜在指标\n• 因果关系仍需干预研究验证",
+      "figure": null
+    },
+    {
+      "heading": "参考文献",
+      "body": "在这里填写参考文献。",
+      "figure": null
+    }
+  ],
+  "contact": "联系邮箱：name@example.org"
+}

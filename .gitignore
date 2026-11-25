@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+.eggs/
+
+# Tests and tools
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+tests/parity/out/
+
+# Settings and data: these hold API keys and the user's own figures
+.env
+.figwright/
+config.json
+Figwright/
+
+# Editors and systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini

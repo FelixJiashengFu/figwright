@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figwright 图匠</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-tab="draw">
+<header class="bar">
+  <div class="brand">
+    <img src="/favicon.ico" alt="" width="26" height="26">
+    <b>Figwright</b><span class="zh-only">图匠</span>
+    <span class="ver" id="version"></span>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button data-go="draw" class="on" data-i="tab.draw">画图</button>
+    <button data-go="plot" data-i="tab.plot">数据图</button>
+    <button data-go="image" data-i="tab.image">图片工坊</button>
+    <button data-go="projects" data-i="tab.projects">项目</button>
+    <button data-go="settings" data-i="tab.settings">设置</button>
+  </nav>
+  <div class="right">
+    <span id="offline-flag" class="flag hidden" data-i="flag.offline" title="">离线演示</span>
+    <button id="lang-btn" class="ghost" title="中文 / English">EN</button>
+    <a class="ghost" href="https://github.com/FelixJiashengFu/figwright" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</header>
+
+<main>
+<!-- ------------------------------------------------------------------ draw -->
+<section id="tab-draw" class="tab on">
+  <aside class="side left">
+    <div class="pane">
+      <div class="pane-head"><b data-i="draw.make">生成</b></div>
+      <textarea id="prompt" rows="5" data-i-ph="draw.prompt.ph" placeholder="描述你要的图，例如：样本采集 → DNA 提取 → 质检，如果合格则建库测序，否则重新提取 → 数据分析"></textarea>
+      <div class="row">
+        <select id="kind" title="图的种类"></select>
+        <select id="quality" title="质量"></select>
+      </div>
+      <div class="row">
+        <button id="go" class="primary" data-i="draw.go">生成</button>
+        <button id="example" class="ghost" data-i="draw.example">来个例子</button>
+      </div>
+      <div class="row small">
+        <label class="file ghost"><input type="file" id="source-file" accept=".pdf,.docx,.txt,.md,.tex,.csv,.json" hidden><span data-i="draw.source">读入资料</span></label>
+        <label class="file ghost"><input type="file" id="sketch-file" accept="image/*" hidden><span data-i="draw.sketch">草图转图</span></label>
+        <label class="file ghost"><input type="file" id="import-file" accept=".svg,.json,.figwright,image/*" hidden><span data-i="draw.import">打开文件</span></label>
+      </div>
+      <p id="source-note" class="note hidden"></p>
+    </div>
+
+    <div class="pane">
+      <div class="pane-head"><b data-i="draw.templates">模板</b></div>
+      <div id="templates" class="grid"></div>
+    </div>
+
+    <div class="pane">
+      <div class="pane-head"><b data-i="draw.illustrate">AI 插画</b></div>
+      <textarea id="ill-prompt" rows="2" data-i-ph="draw.ill.ph" placeholder="一个线粒体的示意图，扁平风格"></textarea>
+      <div class="row"><select id="ill-style"></select><button id="ill-go" class="ghost" data-i="draw.ill.go">画</button></div>
+    </div>
+  </aside>
+
+  <div class="stage">
+    <div class="toolbar" id="toolbar">
+      <div class="group">
+        <button data-tool="select" class="on" title="选择 V">⬚</button>
+        <button data-tool="connect" title="连线 C">↗</button>
+        <button data-tool="text" title="文字 T">T</button>
+        <button data-tool="note" title="批注 N">✎</button>
+      </div>
+      <div class="group">
+        <select id="add-shape" title="加形状"></select>
+        <select id="add-icon" title="加图标"></select>
+      </div>
+      <div class="group">
+        <button id="undo" title="撤销 Ctrl+Z">↶</button>
+        <button id="redo" title="重做 Ctrl+Shift+Z">↷</button>
+      </div>
+      <div class="group">
+        <button id="zoom-out" title="缩小">−</button>
+        <button id="zoom-fit" title="适应窗口">⤢</button>
+        <button id="zoom-in" title="放大">+</button>
+        <span id="zoom-label" class="zoom">100%</span>
+      </div>
+      <div class="group grow">
+        <select id="theme" title="配色"></select>
+        <label class="check" title="按杂志统一样式"><input type="checkbox" id="lock-style"><span data-i="draw.lock">锁定样式</span></label>
+        <label class="check"><input type="checkbox" id="show-notes" checked><span data-i="draw.notes">显示批注</span></label>
+        <select id="cvd" title="色盲预览"></select>
+      </div>
+      <div class="group">
+        <button id="tidy" data-i="draw.tidy">整理版面</button>
+        <button id="polish" data-i="draw.polish">AI 润色</button>
+        <button id="save-project" data-i="draw.save">存档</button>
+        <button id="export" class="primary" data-i="draw.export">导出</button>
+      </div>
+    </div>
+    <div class="canvas-wrap" id="canvas-wrap" tabindex="0">
+      <div id="canvas"></div>
+      <div id="editing" class="editing hidden"><textarea spellcheck="false"></textarea></div>
+    </div>
+    <div class="statusbar">
+      <span id="status" class="grow"></span>
+      <span id="issues" class="issues"></span>
+      <span id="size-label"></span>
+    </div>
+  </div>
+
+  <aside class="side right">
+    <div class="pane">
+      <div class="pane-head"><b data-i="draw.chat">对话修改</b></div>
+      <textarea id="instruct" rows="2" data-i-ph="draw.chat.ph" placeholder="例如：把质检那个框改成橙色；在测序后面加一步 比对"></textarea>
+      <div class="row"><button id="refine" class="primary grow" data-i="draw.refine">修改</button></div>
+      <p class="note" id="refine-help"></p>
+    </div>
+    <div class="pane" id="props-pane">
+      <div class="pane-head"><b data-i="draw.props">属性</b><span id="sel-count" class="muted"></span></div>
+      <div id="props"></div>
+    </div>
+    <div class="pane">
+      <div class="pane-head"><b data-i="draw.layers">图层</b></div>
+      <div id="layers" class="layers"></div>
+    </div>
+  </aside>
+</section>
+
+<!-- ------------------------------------------------------------------ plot -->
+<section id="tab-plot" class="tab">
+  <aside class="side left">
+    <div class="pane">
+      <div class="pane-head"><b data-i="plot.data">数据</b></div>
+      <div class="row">
+        <label class="file ghost grow"><input type="file" id="table-file" accept=".csv,.tsv,.txt,.xlsx,.xls,.json" hidden><span data-i="plot.open">打开表格</span></label>
+        <button id="table-paste-btn" class="ghost" data-i="plot.paste">粘贴</button>
+      </div>
+      <textarea id="table-paste" rows="4" class="hidden" data-i-ph="plot.paste.ph" placeholder="直接粘贴几列数据，用逗号或制表符分隔"></textarea>
+      <select id="sheet" class="hidden"></select>
+      <div id="table-preview" class="preview"></div>
+    </div>
+    <div class="pane">
+      <div class="pane-head"><b data-i="plot.ask">一句话改图</b></div>
+      <textarea id="plot-ask" rows="2" data-i-ph="plot.ask.ph" placeholder="例如：改成箱线图，加显著性标记，纵轴改成对数"></textarea>
+      <div class="row"><button id="plot-ask-go" class="primary grow" data-i="plot.ask.go">改</button></div>
+    </div>
+  </aside>
+  <div class="stage">
+    <div class="toolbar" id="plot-toolbar"></div>
+    <div class="canvas-wrap plain"><div id="chart"></div></div>
+    <div class="statusbar"><span id="plot-caption" class="grow"></span></div>
+  </div>
+  <aside class="side right">
+    <div class="pane"><div class="pane-head"><b data-i="plot.spec">图形设置</b></div><div id="plot-spec"></div></div>
+    <div class="pane"><div class="pane-head"><b data-i="plot.stats">统计</b></div><div id="plot-stats" class="stats"></div></div>
+  </aside>
+</section>
+
+<!-- ----------------------------------------------------------------- image -->
+<section id="tab-image" class="tab">
+  <aside class="side left">
+    <div class="pane">
+      <div class="pane-head"><b data-i="image.open">打开图片</b></div>
+      <label class="file ghost block"><input type="file" id="lab-file" accept="image/*" hidden><span data-i="image.choose">选择照片、扫描件或截图</span></label>
+      <p class="note" data-i="image.hint">胶图、显微照片、手绘草图都行。处理都在你自己的电脑上完成。</p>
+    </div>
+    <div class="pane">
+      <div class="pane-head"><b data-i="image.clean">清理</b></div>
+      <div id="lab-controls"></div>
+      <div class="row"><button id="lab-apply" class="primary grow" data-i="image.apply">处理</button><button id="lab-reset" class="ghost" data-i="image.reset">还原</button></div>
+    </div>
+    <div class="pane">
+      <div class="pane-head"><b data-i="image.vector">转矢量</b></div>
+      <div class="row"><label data-i="image.colors">颜色数</label><input type="range" id="vec-colors" min="2" max="16" value="6"><span id="vec-colors-v">6</span></div>
+      <div class="row"><label data-i="image.detail">细节</label><select id="vec-detail"></select></div>
+      <label class="check"><input type="checkbox" id="vec-split"><span data-i="image.split">每块一个形状</span></label>
+      <div class="row"><button id="vec-go" class="primary grow" data-i="image.vgo">描成矢量</button></div>
+    </div>
+    <div class="pane">
+      <div class="pane-head"><b data-i="image.redraw">局部重绘</b></div>
+      <p class="note" data-i="image.redraw.hint">在图上拖一个框，写一句要改成什么。</p>
+      <textarea id="redraw-prompt" rows="2" data-i-ph="image.redraw.ph" placeholder="例如：把这块背景换成浅灰"></textarea>
+      <div class="row"><button id="redraw-go" class="primary grow" data-i="image.redraw.go">重绘选中区域</button></div>
+    </div>
+  </aside>
+  <div class="stage">
+    <div class="toolbar">
+      <span id="lab-info" class="grow muted"></span>
+      <button id="lab-to-canvas" data-i="image.tocanvas">放到画布</button>
+      <button id="lab-download" class="primary" data-i="image.download">下载</button>
+    </div>
+    <div class="canvas-wrap plain" id="lab-wrap"><div id="lab-view" class="lab-view"></div></div>
+    <div class="statusbar"><span id="lab-status"></span></div>
+  </div>
+</section>
+
+<!-- -------------------------------------------------------------- projects -->
+<section id="tab-projects" class="tab">
+  <div class="wide">
+    <div class="pane">
+      <div class="pane-head"><b data-i="proj.title">项目</b><button id="proj-refresh" class="ghost" data-i="proj.refresh">刷新</button></div>
+      <div id="project-list" class="cards"></div>
+    </div>
+    <div class="pane">
+      <div class="pane-head"><b data-i="proj.versions">历史版本</b><span id="proj-current" class="muted"></span></div>
+      <div id="version-list" class="versions"></div>
+    </div>
+  </div>
+</section>
+
+<!-- -------------------------------------------------------------- settings -->
+<section id="tab-settings" class="tab">
+  <div class="wide">
+    <div class="pane">
+      <div class="pane-head"><b data-i="set.roles">模型分工</b></div>
+      <p class="note" data-i="set.roles.hint">不填也能用：离线模式用内置规则排版，只是不会动脑子。</p>
+      <div id="roles"></div>
+    </div>
+    <div class="pane">
+      <div class="pane-head"><b data-i="set.providers">接口与密钥</b></div>
+      <p class="note" data-i="set.keys.hint">密钥只存在这台电脑的 ~/.figwright/config.json 里，界面上永远只回显遮挡后的片段。</p>
+      <div id="providers"></div>
+    </div>
+    <div class="pane">
+      <div class="pane-head"><b data-i="set.house">统一样式</b></div>
+      <p class="note" data-i="set.house.hint">锁定后，新生成的图都沿用同一套字体、线宽和圆角，一篇论文里的图就不会各长各的。</p>
+      <div id="house"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div id="toast" class="toast hidden"></div>
+<div id="overlay" class="overlay hidden"><div class="dialog" id="dialog"></div></div>
+<div id="busy" class="busy hidden"><div class="spinner"></div><span id="busy-text"></span><button id="busy-cancel" class="ghost" data-i="busy.cancel">取消</button></div>
+<div id="print-root" aria-hidden="true"></div>
+
+<script type="module" src="/static/app.js"></script>
+</body>
+</html>

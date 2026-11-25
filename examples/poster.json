@@ -1,0 +1,34 @@
+{
+  "title": "Gut microbiome diversity and sleep quality",
+  "authors": "First Author, Second Author, Third Author",
+  "affiliations": "Department, University",
+  "columns": 3,
+  "sections": [
+    {
+      "heading": "Background",
+      "body": "• Sleep disorders are increasingly common\n• The gut-brain axis may regulate sleep\n• Evidence in humans is limited",
+      "figure": null
+    },
+    {
+      "heading": "Methods",
+      "body": "• 200 adult volunteers\n• Stool 16S rRNA sequencing\n• Two-week sleep diaries",
+      "figure": "Study design"
+    },
+    {
+      "heading": "Results",
+      "body": "• Lower diversity in the poor-sleep group\n• Several genera correlate with sleep scores",
+      "figure": "Diversity comparison"
+    },
+    {
+      "heading": "Conclusions",
+      "body": "• Diversity may be a marker of sleep quality\n• Causality needs intervention studies",
+      "figure": null
+    },
+    {
+      "heading": "References",
+      "body": "List your references here.",
+      "figure": null
+    }
+  ],
+  "contact": "Contact: name@example.org"
+}

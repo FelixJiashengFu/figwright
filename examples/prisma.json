@@ -1,0 +1,41 @@
+{
+  "identified": [
+    {
+      "name": "PubMed",
+      "n": 820
+    },
+    {
+      "name": "Embase",
+      "n": 640
+    },
+    {
+      "name": "Cochrane",
+      "n": 95
+    }
+  ],
+  "duplicates": 410,
+  "automation": 0,
+  "other_removed": 0,
+  "screened": 1145,
+  "excluded": 980,
+  "sought": 165,
+  "not_retrieved": 5,
+  "assessed": 160,
+  "included_studies": 30,
+  "included_reports": 30,
+  "title": "",
+  "excluded_reports": [
+    {
+      "reason": "Wrong study design",
+      "n": 70
+    },
+    {
+      "reason": "Wrong outcome",
+      "n": 48
+    },
+    {
+      "reason": "Incomplete data",
+      "n": 12
+    }
+  ]
+}

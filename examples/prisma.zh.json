@@ -1,0 +1,41 @@
+{
+  "identified": [
+    {
+      "name": "PubMed",
+      "n": 820
+    },
+    {
+      "name": "Embase",
+      "n": 640
+    },
+    {
+      "name": "Cochrane",
+      "n": 95
+    }
+  ],
+  "duplicates": 410,
+  "automation": 0,
+  "other_removed": 0,
+  "screened": 1145,
+  "excluded": 980,
+  "sought": 165,
+  "not_retrieved": 5,
+  "assessed": 160,
+  "included_studies": 30,
+  "included_reports": 30,
+  "title": "",
+  "excluded_reports": [
+    {
+      "reason": "研究设计不符",
+      "n": 70
+    },
+    {
+      "reason": "结局指标不符",
+      "n": 48
+    },
+    {
+      "reason": "数据不全",
+      "n": 12
+    }
+  ]
+}

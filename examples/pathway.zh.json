@@ -1,0 +1,94 @@
+{
+  "title": "MAPK 信号通路",
+  "entities": [
+    {
+      "id": "egf",
+      "name": "EGF",
+      "type": "ligand"
+    },
+    {
+      "id": "egfr",
+      "name": "EGFR",
+      "type": "receptor"
+    },
+    {
+      "id": "ras",
+      "name": "RAS",
+      "type": "kinase"
+    },
+    {
+      "id": "raf",
+      "name": "RAF",
+      "type": "kinase"
+    },
+    {
+      "id": "mek",
+      "name": "MEK",
+      "type": "kinase"
+    },
+    {
+      "id": "erk",
+      "name": "ERK",
+      "type": "kinase"
+    },
+    {
+      "id": "myc",
+      "name": "MYC",
+      "type": "tf"
+    },
+    {
+      "id": "prolif",
+      "name": "细胞增殖",
+      "type": "process"
+    },
+    {
+      "id": "drug",
+      "name": "MEK 抑制剂",
+      "type": "drug"
+    }
+  ],
+  "relations": [
+    {
+      "from": "egf",
+      "to": "egfr",
+      "type": "bind"
+    },
+    {
+      "from": "egfr",
+      "to": "ras",
+      "type": "activate"
+    },
+    {
+      "from": "ras",
+      "to": "raf",
+      "type": "activate"
+    },
+    {
+      "from": "raf",
+      "to": "mek",
+      "type": "activate",
+      "label": "P"
+    },
+    {
+      "from": "mek",
+      "to": "erk",
+      "type": "activate",
+      "label": "P"
+    },
+    {
+      "from": "erk",
+      "to": "myc",
+      "type": "translocate"
+    },
+    {
+      "from": "myc",
+      "to": "prolif",
+      "type": "activate"
+    },
+    {
+      "from": "drug",
+      "to": "mek",
+      "type": "inhibit"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title": "",
+  "steps": [
+    {
+      "title": "Mouse model",
+      "detail": "High-fat diet, 12 weeks",
+      "icon": "mouse"
+    },
+    {
+      "title": "Treatment",
+      "detail": "Daily gavage, 4 weeks",
+      "icon": "syringe"
+    },
+    {
+      "title": "Tissue collection",
+      "detail": "Liver and serum",
+      "icon": "scissors"
+    },
+    {
+      "title": "scRNA-seq",
+      "detail": "10x Genomics",
+      "icon": "dna"
+    },
+    {
+      "title": "Analysis",
+      "detail": "Clustering, DE genes",
+      "icon": "chart"
+    },
+    {
+      "title": "Validation",
+      "detail": "qPCR and IHC",
+      "icon": "check"
+    }
+  ]
+}

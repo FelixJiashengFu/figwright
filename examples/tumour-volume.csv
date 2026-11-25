@@ -1,0 +1,25 @@
+group,animal,timepoint_h,tumour_volume_mm3,body_weight_g
+vehicle,m1,72,374.2,25.0
+vehicle,m2,72,566.0,23.8
+vehicle,m3,72,365.2,24.4
+vehicle,m4,72,521.3,26.0
+vehicle,m5,72,374.9,22.7
+vehicle,m6,72,541.0,25.2
+vehicle,m7,72,612.5,25.9
+vehicle,m8,72,471.2,24.1
+low dose,m1,72,526.6,24.1
+low dose,m2,72,309.1,22.9
+low dose,m3,72,366.2,24.7
+low dose,m4,72,337.7,24.4
+low dose,m5,72,377.7,25.5
+low dose,m6,72,431.1,24.8
+low dose,m7,72,244.0,25.5
+low dose,m8,72,268.0,24.3
+high dose,m1,72,139.6,24.5
+high dose,m2,72,163.4,24.8
+high dose,m3,72,302.9,24.4
+high dose,m4,72,218.8,22.6
+high dose,m5,72,180.1,25.4
+high dose,m6,72,186.8,25.0
+high dose,m7,72,193.5,23.1
+high dose,m8,72,209.3,23.4

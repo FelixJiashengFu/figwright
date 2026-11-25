@@ -1,0 +1,30 @@
+{
+  "title": "A 30-minute paper strip detects resistant bacteria",
+  "panels": [
+    {
+      "heading": "Problem",
+      "icon": "bacterium",
+      "bullets": [
+        "Resistant infections are rising",
+        "Culture takes 2 to 3 days"
+      ]
+    },
+    {
+      "heading": "Approach",
+      "icon": "scissors",
+      "bullets": [
+        "CRISPR-based paper strip",
+        "No instrument, 30-minute readout"
+      ]
+    },
+    {
+      "heading": "Finding",
+      "icon": "chart",
+      "bullets": [
+        "120 clinical samples",
+        "Close agreement with culture"
+      ]
+    }
+  ],
+  "takeaway": "Strip testing is suitable for point-of-care screening."
+}

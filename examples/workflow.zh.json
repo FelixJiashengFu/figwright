@@ -1,0 +1,35 @@
+{
+  "title": "",
+  "steps": [
+    {
+      "title": "小鼠造模",
+      "detail": "高脂饮食 12 周",
+      "icon": "mouse"
+    },
+    {
+      "title": "给药处理",
+      "detail": "每日灌胃 4 周",
+      "icon": "syringe"
+    },
+    {
+      "title": "取材",
+      "detail": "肝脏与血清",
+      "icon": "scissors"
+    },
+    {
+      "title": "单细胞测序",
+      "detail": "10x Genomics",
+      "icon": "dna"
+    },
+    {
+      "title": "生信分析",
+      "detail": "聚类与差异表达",
+      "icon": "chart"
+    },
+    {
+      "title": "验证实验",
+      "detail": "qPCR 与免疫组化",
+      "icon": "check"
+    }
+  ]
+}

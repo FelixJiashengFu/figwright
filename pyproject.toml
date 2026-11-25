@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "figwright"
+version = "0.1.0"
+description = "Figwright (图匠): an open-source AI figure workshop for research. Text or sketch to editable SVG/PPTX, flowcharts, data plots, bitmap vectorizer. Bring your own model."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Figwright contributors" }]
+keywords = ["scientific figures", "svg", "pptx", "flowchart", "plot", "llm", "vectorizer"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Visualization",
+]
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn>=0.27",
+  "httpx>=0.27",
+  "python-multipart>=0.0.9",
+  "numpy>=1.24",
+  "pillow>=10",
+  "opencv-python-headless>=4.8",
+  "matplotlib>=3.8",
+  "pandas>=2.0",
+  "openpyxl>=3.1",
+  "scipy>=1.11",
+  "python-pptx>=1.0",
+  "pypdf>=4.0",
+  "resvg-py>=0.3",
+  "anthropic>=1.0",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.10"]
+dev = ["pytest>=8", "mcp>=1.10"]
+
+[project.scripts]
+figwright = "figwright.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/FelixJiashengFu/figwright"
+Issues = "https://github.com/FelixJiashengFu/figwright/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/figwright"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

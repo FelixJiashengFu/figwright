@@ -1,0 +1,73 @@
+{
+  "title": "",
+  "direction": "TB",
+  "nodes": [
+    {
+      "id": "n1",
+      "text": "开始",
+      "kind": "start"
+    },
+    {
+      "id": "n2",
+      "text": "收集样本",
+      "kind": "process"
+    },
+    {
+      "id": "n3",
+      "text": "提取 RNA",
+      "kind": "process"
+    },
+    {
+      "id": "n4",
+      "text": "质检是否合格？",
+      "kind": "decision"
+    },
+    {
+      "id": "n5",
+      "text": "建库测序",
+      "kind": "process"
+    },
+    {
+      "id": "n6",
+      "text": "数据分析",
+      "kind": "process"
+    },
+    {
+      "id": "n7",
+      "text": "结束",
+      "kind": "end"
+    }
+  ],
+  "edges": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5",
+      "label": "是"
+    },
+    {
+      "from": "n4",
+      "to": "n3",
+      "label": "否"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n6",
+      "to": "n7"
+    }
+  ]
+}
