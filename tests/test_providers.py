@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import base64
 import json
+import os
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -421,6 +422,7 @@ def test_a_key_is_stored_and_only_ever_shown_masked():
     assert config.mask_key(KEY) != KEY and KEY[-4:] in config.mask_key(KEY)
 
 
+@pytest.mark.skipif(os.name == "nt", reason="Windows has no POSIX file mode; access is governed by its own ACLs")
 def test_the_config_file_is_not_world_readable():
     config.save_config(config.load_config())
     assert oct(config.config_path().stat().st_mode)[-3:] == "600"

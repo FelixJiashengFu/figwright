@@ -9,12 +9,14 @@
  * export, so this runs both over the same input and the test diffs them.
  */
 
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join } from 'node:path';
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const scene = await import(join(here, '..', '..', 'src', 'figwright', 'web', 'scene.js'));
+// A bare absolute path is not importable on Windows ("d:\..." is read as a URL
+// scheme), so the path becomes a file:// URL before it is imported.
+const scene = await import(pathToFileURL(join(here, '..', '..', 'src', 'figwright', 'web', 'scene.js')).href);
 
 const [, , inPath, outPath] = process.argv;
 const data = JSON.parse(readFileSync(inPath, 'utf8'));
